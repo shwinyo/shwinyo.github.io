@@ -15,6 +15,16 @@ html, body {
         border: 10px solid #000000;
         display: block;
     }
+    
+    <style>
+p.serif {
+    font-family: "Helvetica", Times, serif;
+}
+
+p.sansserif {
+    font-family: Arial, Helvetica, sans-serif;
+}
+</style>
 ​
 a, img {
   display: inline-block;
