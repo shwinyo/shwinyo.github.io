@@ -3,16 +3,7 @@ html, body {
       width: 100%;
       margin: 0;
       padding: 0;
-      
-      <style>
-p.serif {
-    font-family: "Helvetica", Times, serif;
-}
-
-p.sansserif {
-    font-family: Arial, Helvetica, sans-serif;
-}
-</style>
+      font-family: "Helvetica";
       
 }
 
