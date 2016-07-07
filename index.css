@@ -6,15 +6,6 @@ html, body {
       
 }
 
-<style>
-p.ex1 {
-    font: 15px arial, sans-serif;
-}
-
-p.ex2 {
-    font: italic bold 12px/30px Georgia, serif;
-}
-</style>
     header {
       width: 100%;
         background-color: lightgrey;
@@ -27,15 +18,6 @@ p.ex2 {
         display: block;
     }
     
-    <style>
-p.serif {
-    font-family: "Helvetica", Times, serif;
-}
-
-p.sansserif {
-    font-family: Arial, Helvetica, sans-serif;
-}
-</style>
 ​
 a, img {
   display: inline-block;
