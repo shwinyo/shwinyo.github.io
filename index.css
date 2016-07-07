@@ -6,7 +6,7 @@ html, body {
 }
     header {
       width: 100%;
-        background-color: #FFA120;
+        background-color: lightgrey;
         padding: 0 0 40%;
         text-align: center;
         background-repeat: no-repeat;
