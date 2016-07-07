@@ -20,7 +20,9 @@ a, img {
   display: inline-block;
 }
 
-
+p {
+    font-family: "Helvetica", Georgia, Serif;
+}
 #versusdiv {
   display: flex;
   align-items: center;
