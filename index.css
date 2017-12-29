@@ -1,61 +1,13 @@
-html, body {
-      height: 100%;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: "Helvetica";
-      
+body {
+    background-color: lightblue;
 }
 
-    header {
-      width: 100%;
-        background-color: lightgrey;
-        padding: 0 0 40%;
-        text-align: center;
-        background-repeat: no-repeat;
-        padding: 0px;
-        font-size: 30px;
-           font-family: "Helvetica";
-        display: block;
-    }
-    
-​
-a, img {
-  display: inline-block;
+h1 {
+    color: white;
+    text-align: center;
 }
 
-#versusdiv {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+p {
+    font-family: verdana;
+    font-size: 20px;
 }
-
-    nav
-​
-        float: left;
-    }
-    a, img {
-      display: inline-block;
-    }
-​
-    a {
-      align-items: center
-        color: ;
-    }
-​
-    }
-    aside {
-        width: 100%;
-        display: inline-block;
-        background-color:;
-        padding:;
-        min-height: 100%;
-    }
-    footer {
-        width: 100%;
-        background-color:#FF5326;
-        color: #FFFFFF;
-        text-align: center;
-        clear: both;
-        display: block;
-    }
