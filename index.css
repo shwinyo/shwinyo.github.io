@@ -1,9 +1,8 @@
-body {background-color: light-blue;}
 body {
-    color: white;
+    background-color: blue;
 }
-h1 {color: white;
-    text-align: center;}
-<h1 style="background-color:rgb(56, 89, 255);">
-p {font-family: Courier;
-    font-size: 12px;}
+
+h1 {
+    color: white;
+    margin-left: 20px;
+}
