@@ -1,35 +1,26 @@
 body {
-    background-color:Turquoise;
+    background-color:WhiteSmoke;
 }
 
 h1 {
-    color: white;
+    color: black;
     margin-left: 20px;
     
 }
 h3 {
-    color: white;
+    color: black;
     margin-left: 20px;
 }
 p{
-    color: white;
+    color: black;
     margin-left: 20px;
 }
-h1 {
-    font-size: 2.5em;
-}
-h3 {
-    font-size: 1.875em;
-}
-p {
-    font-size: 0.875em;
-}
 p{
-    font: 14px Helvetica, sans-serif;
+    font: 14px Georgia, serif;
 }
 h1{
-    font: bold 16px Helvetica, sans-serif;
+    font: bold 16px Georgia, serif;
 }
 h3{
-    font: bold 16px Helvetica, sans-serif;
+    font: bold 16px Georgia, sserif;
 }
