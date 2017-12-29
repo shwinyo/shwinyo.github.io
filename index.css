@@ -25,11 +25,11 @@ p {
     font-size: 0.875em;
 }
 p{
-    font: 14px courier, serif;
+    font: 14px Helvetica, sans-serif;
 }
 h1{
-    font: 14px courier, serif;
+    font: bold 16px Helvetica, sans-serif;
 }
 h3{
-    font: 14px courier, serif;
+    font: bold 16px Helvetica, sans-serif;
 }
