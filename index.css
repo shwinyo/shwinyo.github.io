@@ -24,3 +24,12 @@ h3 {
 p {
     font-size: 0.875em;
 }
+p{
+    font: 14px courier, serif;
+}
+h1{
+    font: 14px courier, serif;
+}
+h3{
+    font: 14px courier, serif;
+}
