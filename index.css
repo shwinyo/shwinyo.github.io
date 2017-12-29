@@ -1,7 +1,7 @@
-body {background-color: lightblue;}
+body {background-color: blue;}
 
 h1 {color: white;
     text-align: center;}
 <h1 style="background-color:rgb(56, 89, 255);">
-p {font-family: helvetica;
+p {font-family: terminal;
     font-size: 12px;}
