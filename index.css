@@ -1,16 +1,8 @@
-body {
-    background-color:WhiteSmoke;
-}
-
+body {background-color:WhiteSmoke;}
 h1 {
     color: black;
-    margin-left: 20px;
-    
-}
-h3 {
-    color: black;
-    margin-left: 20px;
-}
+    margin-left: 20px;}
+h3 {color: black; margin-left: 20px;}
 p{
     color: black;
     margin-left: 20px;
