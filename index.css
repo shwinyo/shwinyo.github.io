@@ -1,4 +1,30 @@
 body {background-color:WhiteSmoke;}
+<head>
+<style type="text/css">
+body{
+    margin:0px;
+    background:#000;
+}
+.header {
+    height:50px;
+    background:#F0F0F0;
+    border:1px solid #CCC;
+    width:960px;
+    margin:0px auto;
+}
+.content {
+    width:960px;
+    background: #F0F0F0;
+    border: 1px solid #CCC;
+    height: 2000px;
+    margin: 20px auto;
+}
+</style>
+</head>
+<body>
+ 
+    <div></div>
+    <div></div>
 h1 {
     color: black;
     margin-left: 20px;}
