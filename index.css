@@ -1,55 +1,29 @@
-/* Reset default browser styles */
-* {
-  margin: 30px;
-  padding: 30px;
-  box-sizing: border-box;
-}
-
-/* Basic styling for the body */
 body {
-  font-family: Arial, sans-serif;
+  background-color: #f5f5dc; /* light beige */
+  font-family: 'Roboto', sans-serif; /* cool sans-serif font */
   font-size: 16px;
   line-height: 1.5;
-  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
 }
 
-/* Basic styling for headings */
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
-  margin-bottom: 1rem;
 }
 
-h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-/* Basic styling for links */
 a {
-  color: #007bff;
+  color: #000;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* Basic styling for buttons */
-button, input[type="submit"] {
-  background-color: #007bff;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 0 10px;
+  }
 }
-
-button:hover, input[type="submit"]:hover {
-  background-color: #0069d9;
