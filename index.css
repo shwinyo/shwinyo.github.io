@@ -13,7 +13,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   color: #0000EE; 
-  text-decoration: underline dotted;
+  text-decoration: black wavy underline;
 }
 
 .container {
