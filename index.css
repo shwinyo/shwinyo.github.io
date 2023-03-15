@@ -1,6 +1,6 @@
 body {
-  background-color: #f5f5dc; /* light beige */
-  font-family: 'Roboto', sans-serif; /* cool sans-serif font */
+  background-color: teal; /
+  font-family: 'Roboto', sans-serif; /
   font-size: 16px;
   line-height: 1.5;
   margin: 20x;
@@ -12,14 +12,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: #007bff; /* blue color */
+  color: #007bff; 
   text-decoration: none;
 }
 
 .container {
   max-width: 600px;
   margin: 15 auto;
-  padding: 0 20px;
+  padding: 15 20px;
 }
 
 @media screen and (max-width: 600px) {
@@ -27,3 +27,5 @@ a {
     padding: 0 10px;
   }
 }
+
+
