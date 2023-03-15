@@ -12,8 +12,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: #007bff; 
-  text-decoration: none;
+  color: #0000EE; 
+  text-decoration: underline dotted;
 }
 
 .container {
