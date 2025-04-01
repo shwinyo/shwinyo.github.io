@@ -1,31 +1,70 @@
 body {
-  background-color: #f5f5dc; 
-  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #FFF1E5;  
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
-  line-height: 1.5;
-  margin: 20px;
-  padding: 15px;
+  line-height: 1.6;
+  margin: 0;
+  padding: 40px;
+  color: #333333;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
+h2 {
+  font-size: 2em;
+  color: #222222;
+  margin-bottom: 1em;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 0.5em;
+}
+
+p {
+  margin-bottom: 1.2em;
 }
 
 a {
-  color: #0000EE; 
-  text-decoration: black underline;
+  color: #2c5282;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.2s;
 }
 
-.container {
-  max-width: 600px;
-  margin: 15 auto;
-  padding: 15 20px;
+a:hover {
+  border-bottom-color: #2c5282;
+}
+
+small {
+  color: #666666;
+  font-size: 0.9em;
+}
+
+button {
+  background-color: #2c5282;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #1a365d;
+}
+
+marquee {
+  margin: 1em 0;
+  color: #2c5282;
 }
 
 @media screen and (max-width: 600px) {
-  .container {
-    padding: 0 10px;
+  body {
+    padding: 20px;
+    font-size: 15px;
+  }
+  
+  h2 {
+    font-size: 1.8em;
   }
 }
-
-
