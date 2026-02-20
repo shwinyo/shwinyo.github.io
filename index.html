@@ -41,45 +41,17 @@
   }
 
   /* Desktop Icons */
-  .desktop-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 72px;
-    margin: 8px;
-    cursor: pointer;
-    float: left;
-    text-align: center;
-  }
-
-  .desktop-icon:hover .icon-label {
-    background: var(--win-navy);
-    color: white;
-  }
-
-  .desktop-icon img, .desktop-icon .icon-img {
-    width: 32px;
-    height: 32px;
-    display: block;
-    margin: 0 auto 4px;
-    image-rendering: pixelated;
-  }
-
-  .icon-label {
-    font-size: 11px;
-    color: white;
-    text-shadow: 1px 1px 1px black;
-    padding: 1px 3px;
-    word-break: break-word;
-  }
-
-  /* SVG Icons */
-  .icon-svg {
-    width: 32px;
-    height: 32px;
-    margin: 0 auto 4px;
-    display: block;
-  }
+<div class="desktop-icon" onclick="showDialog()">
+    <svg class="icon-svg" viewBox="0 0 32 32">
+      <rect x="4" y="2" width="22" height="28" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
+      <rect x="6" y="4" width="18" height="12" fill="#fff" stroke="#808080" stroke-width="0.5"/>
+      <ellipse cx="16" cy="24" rx="5" ry="4" fill="#808080"/>
+      <ellipse cx="16" cy="24" rx="3" ry="2.5" fill="#404040"/>
+      <rect x="14" y="2" width="4" height="3" fill="#808080"/>
+      <circle cx="16" cy="3.5" r="1" fill="#404040"/>
+    </svg>
+    <span class="icon-label">Contact Me</span>
+  </div>
 
   /* Windows */
   .window {
@@ -444,70 +416,29 @@
     margin: 2px 4px;
   }
 
-  /* Dialog box */
-  #email-dialog {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 320px;
-    background: var(--win-gray);
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-    z-index: 3000;
-    display: none;
-  }
-
-  .dialog-content {
-    padding: 16px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  .dialog-icon {
-    font-size: 32px;
-    flex-shrink: 0;
-  }
-
-  .dialog-text {
-    font-size: 11px;
-    line-height: 1.5;
-  }
-
-  .dialog-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    padding: 0 16px 12px;
-  }
-
-  .dialog-btn {
-    min-width: 75px;
-    height: 23px;
-    background: var(--win-gray);
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-    font-size: 11px;
-    cursor: pointer;
-    padding: 0 8px;
-  }
-
-  .dialog-btn:active {
-    border-top: 2px solid #404040;
-    border-left: 2px solid #404040;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
-  }
-
-  .dialog-btn.default {
-    border: 2px solid #000;
-    box-shadow: inset 0 0 0 2px var(--win-gray), inset 0 0 0 3px #ffffff;
-  }
+  <div id="email-dialog">
+  <div class="window-titlebar">
+    <span class="window-title">
+      <svg class="window-title-icon" viewBox="0 0 16 16">
+        <rect width="16" height="16" fill="#000080"/>
+        <text x="1" y="12" fill="white" font-size="10">✉</text>
+      </svg>
+      Contact
+    </span>
+    <div class="window-controls">
+      <button class="win-btn" onclick="hideDialog()">✕</button>
+    </div>
+  </div>
+  <div class="dialog-content">
+    <div class="dialog-icon">📬</div>
+    <div class="dialog-text">
+      You can reach me at ashwin.a.rodrigues@gmail.com.
+    </div>
+  </div>
+  <div class="dialog-buttons">
+    <button class="dialog-btn default" onclick="hideDialog()">OK</button>
+  </div>
+</div>
 
   /* Scrollbar */
   ::-webkit-scrollbar { width: 16px; }
