@@ -1,57 +1,1014 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="index.css">
-  <title>Ashwin's web page.</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashwin's web page.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --win-bg: #008080;
+    --win-gray: #c0c0c0;
+    --win-dark: #808080;
+    --win-darker: #404040;
+    --win-light: #ffffff;
+    --win-navy: #000080;
+    --win-title-active: linear-gradient(to right, #000080, #1084d0);
+    --win-title-inactive: linear-gradient(to right, #808080, #b0b0b0);
+    --border-raised: #ffffff #808080 #808080 #ffffff;
+    --border-sunken: #808080 #ffffff #ffffff #808080;
+  }
+
+  body {
+    font-family: 'MS Sans Serif', 'Pixelated MS Sans Serif', Arial, sans-serif;
+    font-size: 11px;
+    background-color: var(--win-bg);
+    height: 100vh;
+    overflow: hidden;
+    cursor: default;
+    user-select: none;
+  }
+
+  /* Desktop */
+  #desktop {
+    width: 100%;
+    height: calc(100vh - 28px);
+    position: relative;
+    padding: 8px;
+  }
+
+  /* Desktop Icons */
+  .desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 72px;
+    margin: 8px;
+    cursor: pointer;
+    float: left;
+    text-align: center;
+  }
+
+  .desktop-icon:hover .icon-label {
+    background: var(--win-navy);
+    color: white;
+  }
+
+  .desktop-icon img, .desktop-icon .icon-img {
+    width: 32px;
+    height: 32px;
+    display: block;
+    margin: 0 auto 4px;
+    image-rendering: pixelated;
+  }
+
+  .icon-label {
+    font-size: 11px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    padding: 1px 3px;
+    word-break: break-word;
+  }
+
+  /* SVG Icons */
+  .icon-svg {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto 4px;
+    display: block;
+  }
+
+  /* Windows */
+  .window {
+    position: absolute;
+    background: var(--win-gray);
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    box-shadow: 2px 2px 0 #000, inset 1px 1px 0 #dfdfdf;
+    min-width: 300px;
+  }
+
+  .window-titlebar {
+    background: var(--win-title-active);
+    padding: 3px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: move;
+  }
+
+  .window-title {
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .window-title-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .window-controls {
+    display: flex;
+    gap: 2px;
+  }
+
+  .win-btn {
+    width: 16px;
+    height: 14px;
+    background: var(--win-gray);
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    font-size: 9px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .win-btn:active {
+    border-top: 1px solid #404040;
+    border-left: 1px solid #404040;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  .window-menubar {
+    background: var(--win-gray);
+    padding: 2px 4px;
+    border-bottom: 1px solid #808080;
+    font-size: 11px;
+    display: flex;
+    gap: 0;
+  }
+
+  .menu-item {
+    padding: 2px 6px;
+    cursor: pointer;
+  }
+
+  .menu-item:hover {
+    background: var(--win-navy);
+    color: white;
+  }
+
+  .window-content {
+    padding: 8px;
+    overflow-y: auto;
+    background: white;
+    margin: 4px;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    font-size: 11px;
+    line-height: 1.6;
+    color: black;
+  }
+
+  /* Main window */
+  #main-window {
+    top: 20px;
+    left: 100px;
+    width: 560px;
+  }
+
+  #main-window .window-content {
+    height: 400px;
+  }
+
+  /* Links window */
+  #links-window {
+    top: 178px;
+    left: 480px;
+    width: 340px;
+  }
+
+  #links-window .window-content {
+    height: auto;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  /* Email window */
+  #email-window {
+    top: 480px;
+    left: 100px;
+    width: 400px;
+  }
+
+  /* Notepad window */
+  #notepad-window {
+    top: 300px;
+    left: 680px;
+    width: 300px;
+    display: none;
+  }
+
+  #notepad-window .window-content {
+    height: 200px;
+  }
+
+  .window-content h2 {
+    font-size: 13px;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  .window-content h3 {
+    font-size: 11px;
+    margin: 12px 0 4px;
+    font-weight: bold;
+  }
+
+  .window-content p {
+    margin-bottom: 8px;
+  }
+
+  .window-content a {
+    color: #0000cc;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .window-content a:visited {
+    color: #800080;
+  }
+
+  .window-content a:hover {
+    color: #cc0000;
+  }
+
+  .pub-link {
+    display: block;
+    padding: 1px 0;
+    color: #0000cc;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 11px;
+  }
+
+  .pub-link:hover {
+    background: #000080;
+    color: white;
+    text-decoration: none;
+  }
+
+  /* Taskbar */
+  #taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: var(--win-gray);
+    border-top: 2px solid #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 2px;
+    gap: 4px;
+    z-index: 1000;
+  }
+
+  #start-btn {
+    height: 22px;
+    padding: 0 6px;
+    background: var(--win-gray);
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    font-weight: bold;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  #start-btn:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+  }
+
+  .win-logo {
+    width: 16px;
+    height: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+  }
+
+  .win-logo span {
+    display: block;
+  }
+
+  .win-logo span:nth-child(1) { background: #ff0000; }
+  .win-logo span:nth-child(2) { background: #00ff00; }
+  .win-logo span:nth-child(3) { background: #0000ff; }
+  .win-logo span:nth-child(4) { background: #ffff00; }
+
+  .taskbar-sep {
+    width: 2px;
+    height: 20px;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #ffffff;
+    margin: 0 2px;
+  }
+
+  .taskbar-btn {
+    height: 22px;
+    padding: 0 8px;
+    background: var(--win-gray);
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    max-width: 140px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .taskbar-btn.active {
+    border-top: 1px solid #404040;
+    border-left: 1px solid #404040;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    background: #b4b4b4;
+  }
+
+  #clock {
+    margin-left: auto;
+    padding: 0 8px;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    min-width: 60px;
+    justify-content: center;
+  }
+
+  /* Start menu */
+  #start-menu {
+    position: fixed;
+    bottom: 28px;
+    left: 0;
+    width: 200px;
+    background: var(--win-gray);
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    display: none;
+    z-index: 2000;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+  }
+
+  #start-menu-sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+    background: var(--win-navy);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 4px;
+  }
+
+  #start-menu-sidebar span {
+    color: #c0c0c0;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  #start-menu-sidebar span strong {
+    color: white;
+  }
+
+  #start-menu-items {
+    margin-left: 24px;
+  }
+
+  .start-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 11px;
+  }
+
+  .start-menu-item:hover {
+    background: var(--win-navy);
+    color: white;
+  }
+
+  .start-menu-item .sm-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .start-menu-sep {
+    border-top: 1px solid #808080;
+    border-bottom: 1px solid #ffffff;
+    margin: 2px 4px;
+  }
+
+  /* Dialog box */
+  #email-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    background: var(--win-gray);
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    z-index: 3000;
+    display: none;
+  }
+
+  .dialog-content {
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .dialog-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .dialog-text {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .dialog-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px 12px;
+  }
+
+  .dialog-btn {
+    min-width: 75px;
+    height: 23px;
+    background: var(--win-gray);
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 0 8px;
+  }
+
+  .dialog-btn:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+  }
+
+  .dialog-btn.default {
+    border: 2px solid #000;
+    box-shadow: inset 0 0 0 2px var(--win-gray), inset 0 0 0 3px #ffffff;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 16px; }
+  ::-webkit-scrollbar-track { background: var(--win-gray); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--win-gray);
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+  }
+  ::-webkit-scrollbar-button {
+    background: var(--win-gray);
+    display: block;
+    height: 16px;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+  }
+
+  /* Marquee */
+  .win-marquee {
+    background: white;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    padding: 2px 4px;
+    margin: 4px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .marquee-text {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+    font-size: 11px;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(400px); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    gap: 2px;
+    padding: 2px 4px 0;
+  }
+
+  .status-pane {
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    padding: 1px 4px;
+    font-size: 11px;
+    flex: 1;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    background: white;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    height: 16px;
+    margin: 4px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--win-navy);
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 10px;
+  }
+
+  .section-break {
+    border-top: 1px solid #808080;
+    border-bottom: 1px solid #ffffff;
+    margin: 8px 0;
+  }
+
+  /* Overlay for dialogs */
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 2500;
+  }
+</style>
 </head>
 <body>
- <p><b>
-The works of Ashwin Rodrigues</b>
 
-    <p><marquee><strong>welcome</strong> </marquee>
-     </header><br><br><br><br><br>
-    <p>My name is Ashwin* Rodrigues. I am a New York-based writer.
-       <small><br>
-*pronounced USH-win. (USH like "hush")
-</small>
-<br>
+<!-- Desktop -->
+<div id="desktop">
 
-<br>
+  <!-- Desktop Icons -->
+  <div class="desktop-icon" onclick="showDialog()">
+    <svg class="icon-svg" viewBox="0 0 32 32">
+      <rect x="2" y="4" width="28" height="22" fill="#fff" stroke="#000" stroke-width="1"/>
+      <rect x="2" y="4" width="28" height="4" fill="#000080"/>
+      <rect x="0" y="26" width="32" height="4" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
+      <text x="5" y="8" fill="white" font-size="3" font-family="Arial">My Page</text>
+      <text x="5" y="16" fill="#000" font-size="2.5" font-family="Arial">Ashwin</text>
+      <text x="5" y="20" fill="#000" font-size="2.5" font-family="Arial">Rodrigues</text>
+    </svg>
+    <span class="icon-label">Contact Me</span>
+  </div>
 
-My work has been cited in places including <a href="http://asuselj.org/wp-content/uploads/2023/05/Manuscript-Vol-12-Iss-2.pdf">The Arizona State Sports and Entertainment Law Journal</a>, <a href="https://journals.sagepub.com/doi/abs/10.1177/0896920521990739">Critical Sociology</a>, and <a href="https://journals.library.columbia.edu/index.php/stlr/article/view/4774">The Columbia Science and Technology Law Review</a>.
+  <div class="desktop-icon" ondblclick="showWindow('links-window')">
+    <svg class="icon-svg" viewBox="0 0 32 32">
+      <rect x="2" y="6" width="26" height="22" fill="#ffff80" stroke="#808080" stroke-width="1"/>
+      <rect x="2" y="6" width="10" height="4" fill="#ffcc00" stroke="#808080" stroke-width="1"/>
+      <line x1="6" y1="14" x2="26" y2="14" stroke="#000" stroke-width="1"/>
+      <line x1="6" y1="18" x2="26" y2="18" stroke="#000" stroke-width="1"/>
+      <line x1="6" y1="22" x2="20" y2="22" stroke="#000" stroke-width="1"/>
+    </svg>
+    <span class="icon-label">Published Works</span>
+  </div>
 
-<br><br>
+  <div class="desktop-icon" ondblclick="showDialog()">
+    <svg class="icon-svg" viewBox="0 0 32 32">
+      <rect x="4" y="2" width="22" height="28" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
+      <rect x="6" y="4" width="18" height="12" fill="#fff" stroke="#808080" stroke-width="0.5"/>
+      <ellipse cx="16" cy="24" rx="5" ry="4" fill="#808080"/>
+      <ellipse cx="16" cy="24" rx="3" ry="2.5" fill="#404040"/>
+      <rect x="14" y="2" width="4" height="3" fill="#808080"/>
+      <circle cx="16" cy="3.5" r="1" fill="#404040"/>
+    </svg>
+    <span class="icon-label">Email Me</span>
+  </div>
 
-I've also appeared on podcasts such as <a href="https://www.youtube.com/watch?v=G4cGmryGeTo">Better Offline</a>, <a href="https://tenthousandposts.podbean.com/e/american-born-confused-poster-ft-ashwin-rodrigues/">10K Posts</a>, <a href="https://www.cbc.ca/listen/cbc-podcasts/209-front-burner/episode/16023736-zyn-zonnic-and-the-nicotine-pouch-craze"> Front Burner</a> and WGBH's <a href="https://www.wgbh.org/podcasts/the-culture-show/august-8-2024-mission-hill-arts-festival-the-1904-olympic-marathon-and-the-hood-milk-bottle">The Culture Show</a>.
-<!--Why are you inspecting the HTML? Mind your business.-->
-</b1><br>
-        
-<br>
-  <p> <strong>links to my work</strong><br>
-<p></p><a href="https://www.bbc.com/worklife/article/20230726-how-changing-college-admissions-could-affect-the-us-workforce">BBC</a> |
-<a href="https://defector.com/a-tale-of-two-gooners">Defector</a> |
-<a href="https://www.fastcompany.com/user/ashwin-rodrigues">Fast Company</a> |
-  <a href="http://fortune.com/author/ashwin-rodrigues/">Fortune</a> | <a href="https://skillet.lifehacker.com/the-kati-roll-casserole-is-a-spicy-masterpiece-1836647796">Lifehacker</a> | <a href="https://lareviewofbooks.org/article/how-can-everything-hit-different/">Los Angeles Review of Books</a> 
-<p><a href="https://www.gq.com/contributor/ashwin-rodrigues">GQ</a> |
-<a href="https://www.theinformation.com/u/ashwinrodrigues">The Information</a> |
-     <a href="https://www.mcsweeneys.net/authors/ashwin-rodrigues">McSweeney's</a> | <a href="https://medium.com/@shwinyo">Medium</a> | <a href="https://melmagazine.com/en-us/story/author/ashwin-rodrigues">MEL Magazine</a> 
-<p> <a href="https://menshealth.com/fitness/a22799169/angry-men-in-rec-coed-sports/">Men's Health</a> |
-       <a href="https://www.morningbrew.com/contributor/Ashwin">Morning Brew</a> | <a href="https://www.nationalgeographic.com/health/article/statins-cholesterol-drugs-controversial">National Geographic</a> | <a href="https://www.nytimes.com/by/ashwin-rodrigues">The New York Times</a></a> | <a href="https://theoutline.com/contributor/202/ashwin-rodrigues">The Outline</a></a> 
- <p></p> <a href="https://www.outsideonline.com/byline/ashwin-rodrigues/">Outside Magazine</a></a>
-  | <a href="https://www.runnersworld.com/runners-stories/a37039437/1904-olympic-marathon/">Runner's World</a> | <a href="https://www.vice.com/en_us/contributor/ashwin-rodrigues">Vice</a> | <a href="https://www.vulture.com/author/ashwin-rodrigues/">Vulture</a> | <a href="https://www.wired.com/author/ashwin-rodrigues/">Wired</a><p></p><br>
-<b> 
+  <div class="desktop-icon" ondblclick="showWindow('notepad-window')">
+    <svg class="icon-svg" viewBox="0 0 32 32">
+      <rect x="4" y="2" width="20" height="28" fill="#fff" stroke="#808080" stroke-width="1"/>
+      <rect x="4" y="2" width="20" height="4" fill="#ffff80"/>
+      <line x1="8" y1="10" x2="20" y2="10" stroke="#808080" stroke-width="1"/>
+      <line x1="8" y1="14" x2="20" y2="14" stroke="#808080" stroke-width="1"/>
+      <line x1="8" y1="18" x2="16" y2="18" stroke="#808080" stroke-width="1"/>
+      <rect x="22" y="0" width="8" height="8" fill="#00ff00" stroke="#006600" stroke-width="1"/>
+      <text x="24" y="7" font-size="6" font-weight="bold">N</text>
+    </svg>
+    <span class="icon-label">Notepad</span>
+  </div>
 
-<button type="button" onclick="alert('my email: ashwin.a.rodrigues@gmail.com')">Send me an email</button>
-       </b>
-<br><br> <small>
-       If you're scared to click the button, my email is ashwin.a.rodrigues@gmail.com. </small>
-  <br><br><br>
-Made with ZERO HELP from Squarespace®
-  </small>
-   <html>
-<head>
-  <footer>
-</footer>
-  </body>
+  <!-- Main Bio Window -->
+  <div class="window" id="main-window" style="z-index:10;" onmousedown="bringToFront(this)">
+    <div class="window-titlebar" onmousedown="startDrag(event, 'main-window')">
+      <span class="window-title">
+        <svg class="window-title-icon" viewBox="0 0 16 16">
+          <rect width="16" height="16" fill="#000080"/>
+          <text x="2" y="12" fill="white" font-size="10" font-weight="bold">A</text>
+        </svg>
+        Ashwin's web page
+      </span>
+      <div class="window-controls">
+        <button class="win-btn" onclick="hideWindow('main-window')">_</button>
+        <button class="win-btn">□</button>
+        <button class="win-btn" onclick="hideWindow('main-window')">✕</button>
+      </div>
+    </div>
+    <div class="window-menubar">
+      <span class="menu-item">File</span>
+      <span class="menu-item">Edit</span>
+      <span class="menu-item">View</span>
+      <span class="menu-item">Go</span>
+      <span class="menu-item">Bookmarks</span>
+      <span class="menu-item">Help</span>
+    </div>
+    <div class="win-marquee">
+      <span class="marquee-text">Welcome to Ashwin's website</span>
+    </div>
+    <div class="window-content" id="main-content">
+      <h2>⭐ The Works of Ashwin Rodrigues</h2>
+
+      <div class="section-break"></div>
+
+      <h3>👤 Welcome</h3>
+      <p>My name is Ashwin* Rodrigues. I am a New York-based writer.</p>
+      <p><em>*pronounced USH-win. (USH like "hush")</em></p>
+
+      <div class="section-break"></div>
+
+      <h3>📰 Academic Citations</h3>
+      <p>My work has been cited in places including:</p>
+      <p>
+        • <a href="http://asuselj.org/wp-content/uploads/2023/05/Manuscript-Vol-12-Iss-2.pdf" target="_blank">The Arizona State Sports and Entertainment Law Journal</a><br>
+        • <a href="https://journals.sagepub.com/doi/abs/10.1177/0896920521990739" target="_blank">Critical Sociology</a><br>
+        • <a href="https://journals.library.columbia.edu/index.php/stlr/article/view/4774" target="_blank">The Columbia Science and Technology Law Review</a>
+      </p>
+
+      <div class="section-break"></div>
+
+      <h3>🎙️ Podcast Appearances</h3>
+      <p>
+        • <a href="https://www.youtube.com/watch?v=G4cGmryGeTo" target="_blank">Better Offline</a><br>
+        • <a href="https://tenthousandposts.podbean.com/e/american-born-confused-poster-ft-ashwin-rodrigues/" target="_blank">10K Posts</a><br>
+        • <a href="https://www.cbc.ca/listen/cbc-podcasts/209-front-burner/episode/16023736-zyn-zonnic-and-the-nicotine-pouch-craze" target="_blank">Front Burner (CBC)</a><br>
+        • <a href="https://www.wgbh.org/podcasts/the-culture-show/august-8-2024-mission-hill-arts-festival-the-1904-olympic-marathon-and-the-hood-milk-bottle" target="_blank">WGBH's The Culture Show</a>
+      </p>
+
+      <div class="section-break"></div>
+
+      <p><small>Made with ZERO HELP from Squarespace®</small></p>
+    </div>
+    <div class="status-bar">
+      <div class="status-pane">Document: Done</div>
+      <div class="status-pane">🔒 Secure</div>
+    </div>
+  </div>
+
+  <!-- Published Works Window -->
+  <div class="window" id="links-window" style="z-index:10;" onmousedown="bringToFront(this)">
+    <div class="window-titlebar" onmousedown="startDrag(event, 'links-window')">
+      <span class="window-title">
+        <svg class="window-title-icon" viewBox="0 0 16 16">
+          <rect width="16" height="16" fill="#ffcc00"/>
+          <text x="1" y="12" font-size="10">📄</text>
+        </svg>
+        Published Works.txt - Notepad
+      </span>
+      <div class="window-controls">
+        <button class="win-btn" onclick="hideWindow('links-window')">_</button>
+        <button class="win-btn">□</button>
+        <button class="win-btn" onclick="hideWindow('links-window')">✕</button>
+      </div>
+    </div>
+    <div class="window-menubar">
+      <span class="menu-item">File</span>
+      <span class="menu-item">Edit</span>
+      <span class="menu-item">Search</span>
+      <span class="menu-item">Help</span>
+    </div>
+    <div class="window-content">
+      <h3>🔗 Links to My Work</h3>
+      <a class="pub-link" href="https://www.bbc.com/worklife/article/20230726-how-changing-college-admissions-could-affect-the-us-workforce" target="_blank">📄 BBC</a>
+      <a class="pub-link" href="https://defector.com/a-tale-of-two-gooners" target="_blank">📄 Defector</a>
+      <a class="pub-link" href="https://www.fastcompany.com/user/ashwin-rodrigues" target="_blank">📄 Fast Company</a>
+      <a class="pub-link" href="http://fortune.com/author/ashwin-rodrigues/" target="_blank">📄 Fortune</a>
+      <a class="pub-link" href="https://skillet.lifehacker.com/the-kati-roll-casserole-is-a-spicy-masterpiece-1836647796" target="_blank">📄 Lifehacker</a>
+      <a class="pub-link" href="https://lareviewofbooks.org/article/how-can-everything-hit-different/" target="_blank">📄 Los Angeles Review of Books</a>
+      <a class="pub-link" href="https://www.gq.com/contributor/ashwin-rodrigues" target="_blank">📄 GQ</a>
+      <a class="pub-link" href="https://www.theinformation.com/u/ashwinrodrigues" target="_blank">📄 The Information</a>
+      <a class="pub-link" href="https://www.mcsweeneys.net/authors/ashwin-rodrigues" target="_blank">📄 McSweeney's</a>
+      <a class="pub-link" href="https://medium.com/@shwinyo" target="_blank">📄 Medium</a>
+      <a class="pub-link" href="https://melmagazine.com/en-us/story/author/ashwin-rodrigues" target="_blank">📄 MEL Magazine</a>
+      <a class="pub-link" href="https://menshealth.com/fitness/a22799169/angry-men-in-rec-coed-sports/" target="_blank">📄 Men's Health</a>
+      <a class="pub-link" href="https://www.morningbrew.com/contributor/Ashwin" target="_blank">📄 Morning Brew</a>
+      <a class="pub-link" href="https://www.nationalgeographic.com/health/article/statins-cholesterol-drugs-controversial" target="_blank">📄 National Geographic</a>
+      <a class="pub-link" href="https://www.nytimes.com/by/ashwin-rodrigues" target="_blank">📄 The New York Times</a>
+      <a class="pub-link" href="https://theoutline.com/contributor/202/ashwin-rodrigues" target="_blank">📄 The Outline</a>
+      <a class="pub-link" href="https://www.outsideonline.com/byline/ashwin-rodrigues/" target="_blank">📄 Outside Magazine</a>
+      <a class="pub-link" href="https://www.runnersworld.com/runners-stories/a37039437/1904-olympic-marathon/" target="_blank">📄 Runner's World</a>
+      <a class="pub-link" href="https://www.vice.com/en_us/contributor/ashwin-rodrigues" target="_blank">📄 Vice</a>
+      <a class="pub-link" href="https://www.vulture.com/author/ashwin-rodrigues/" target="_blank">📄 Vulture</a>
+      <a class="pub-link" href="https://www.wired.com/author/ashwin-rodrigues/" target="_blank">📄 Wired</a>
+    </div>
+  </div>
+
+  <!-- Notepad Window -->
+  <div class="window" id="notepad-window" onmousedown="bringToFront(this)">
+    <div class="window-titlebar" onmousedown="startDrag(event, 'notepad-window')">
+      <span class="window-title">
+        <svg class="window-title-icon" viewBox="0 0 16 16">
+          <rect width="16" height="16" fill="#ffff80"/>
+          <text x="1" y="12" font-size="9">N</text>
+        </svg>
+        ABOUT.txt - Notepad
+      </span>
+      <div class="window-controls">
+        <button class="win-btn" onclick="hideWindow('notepad-window')">_</button>
+        <button class="win-btn">□</button>
+        <button class="win-btn" onclick="hideWindow('notepad-window')">✕</button>
+      </div>
+    </div>
+    <div class="window-menubar">
+      <span class="menu-item">File</span>
+      <span class="menu-item">Edit</span>
+    </div>
+    <div class="window-content" style="font-family: 'Courier New', monospace; font-size: 11px;">
+      Name: Ashwin Rodrigues<br>
+      Location: New York, NY<br>
+      Occupation: Writer<br>
+      Pronunciation: USH-win<br>
+      (USH like "hush")<br>
+      <br>
+      Site built with:<br>
+      ZERO HELP from Squarespace(r)<br>
+      <br>
+      Contact:<br>
+      ashwin.a.rodrigues@gmail.com<br>
+    </div>
+  </div>
+
+</div>
+
+<!-- Email Dialog -->
+<div id="overlay" onclick="hideDialog()"></div>
+<div id="email-dialog">
+  <div class="window-titlebar">
+    <span class="window-title">
+      <svg class="window-title-icon" viewBox="0 0 16 16">
+        <rect width="16" height="16" fill="#000080"/>
+        <text x="1" y="12" fill="white" font-size="10">✉</text>
+      </svg>
+      Send Email
+    </span>
+    <div class="window-controls">
+      <button class="win-btn" onclick="hideDialog()">✕</button>
+    </div>
+  </div>
+  <div class="dialog-content">
+    <div class="dialog-icon">📬</div>
+    <div class="dialog-text">
+      <strong>Contact Ashwin Rodrigues</strong><br><br>
+      You can email me at ashwin.a.rodrigues@gmail.com.
+    </div>
+  </div>
+  <div class="dialog-buttons">
+    <button class="dialog-btn default" onclick="hideDialog()">OK</button>
+  </div>
+</div>
+
+<!-- Taskbar -->
+<div id="taskbar">
+  <button id="start-btn" onclick="toggleStartMenu()">
+    <div class="win-logo">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <strong>Start</strong>
+  </button>
+  <div class="taskbar-sep"></div>
+
+  <button class="taskbar-btn active" id="tb-main" onclick="toggleWindow('main-window', 'tb-main')">
+    🌐 Ashwin's Homepage
+  </button>
+  <button class="taskbar-btn" id="tb-links" onclick="toggleWindow('links-window', 'tb-links')">
+    📄 Published Works
+  </button>
+
+
+  <div id="clock">12:00 PM</div>
+</div>
+
+<!-- Start Menu -->
+<div id="start-menu">
+  <div id="start-menu-sidebar">
+    <span><strong>Windows</strong> 95</span>
+  </div>
+  <div id="start-menu-items">
+    <div class="start-menu-item" ondblclick="showWindow('main-window'); toggleStartMenu()">
+      <svg class="sm-icon" viewBox="0 0 24 24">
+        <rect width="24" height="24" fill="#000080" rx="2"/>
+        <text x="3" y="17" fill="white" font-size="14" font-weight="bold">A</text>
+      </svg>
+      My Bio
+    </div>
+    <div class="start-menu-item" ondblclick="showWindow('links-window'); toggleStartMenu()">
+      <svg class="sm-icon" viewBox="0 0 24 24">
+        <rect width="24" height="24" fill="#ffff80" stroke="#808080" stroke-width="1"/>
+        <line x1="4" y1="8" x2="20" y2="8" stroke="#000" stroke-width="1.5"/>
+        <line x1="4" y1="12" x2="20" y2="12" stroke="#000" stroke-width="1.5"/>
+        <line x1="4" y1="16" x2="14" y2="16" stroke="#000" stroke-width="1.5"/>
+      </svg>
+      Published Works
+    </div>
+    <div class="start-menu-item" onclick="showDialog(); toggleStartMenu()">
+      <svg class="sm-icon" viewBox="0 0 24 24">
+        <rect width="24" height="24" fill="#c0c0c0" stroke="#808080"/>
+        <text x="4" y="16" font-size="14">✉</text>
+      </svg>
+      Email Ashwin
+    </div>
+    <div class="start-menu-sep"></div>
+    <div class="start-menu-item" onclick="showWindow('notepad-window'); toggleStartMenu()">
+      <svg class="sm-icon" viewBox="0 0 24 24">
+        <rect x="2" y="2" width="16" height="20" fill="#fff" stroke="#808080"/>
+        <rect x="2" y="2" width="16" height="4" fill="#ffff80"/>
+        <rect x="16" y="0" width="6" height="6" fill="#00cc00" stroke="#006600"/>
+        <text x="17" y="5" font-size="5" font-weight="bold">N</text>
+      </svg>
+      Notepad
+    </div>
+    <div class="start-menu-sep"></div>
+    <div class="start-menu-item">
+      <svg class="sm-icon" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="#c0c0c0" stroke="#808080"/>
+        <text x="8" y="16" font-size="12">🔌</text>
+      </svg>
+      Shut Down...
+    </div>
+  </div>
+</div>
+
+<script>
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    let h = now.getHours();
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    document.getElementById('clock').textContent = `${h}:${m} ${ampm}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Drag
+  let dragging = null, dragOffX = 0, dragOffY = 0;
+
+  function startDrag(e, id) {
+    dragging = document.getElementById(id);
+    dragOffX = e.clientX - dragging.getBoundingClientRect().left;
+    dragOffY = e.clientY - dragging.getBoundingClientRect().top;
+    bringToFront(dragging);
+    e.preventDefault();
+  }
+
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    let x = e.clientX - dragOffX;
+    let y = e.clientY - dragOffY;
+    x = Math.max(0, Math.min(window.innerWidth - dragging.offsetWidth, x));
+    y = Math.max(0, Math.min(window.innerHeight - 28 - dragging.offsetHeight, y));
+    dragging.style.left = x + 'px';
+    dragging.style.top = y + 'px';
+  });
+
+  document.addEventListener('mouseup', () => { dragging = null; });
+
+  let zTop = 10;
+  function bringToFront(el) {
+    el.style.zIndex = ++zTop;
+  }
+
+  // Windows
+  function showWindow(id) {
+    const w = document.getElementById(id);
+    w.style.display = '';
+    bringToFront(w);
+    const tbMap = {'main-window':'tb-main','links-window':'tb-links','notepad-window':'tb-notepad'};
+    const tb = document.getElementById(tbMap[id]);
+    if (tb) tb.classList.add('active');
+  }
+
+  function hideWindow(id) {
+    document.getElementById(id).style.display = 'none';
+    const tbMap = {'main-window':'tb-main','links-window':'tb-links','notepad-window':'tb-notepad'};
+    const tb = document.getElementById(tbMap[id]);
+    if (tb) tb.classList.remove('active');
+  }
+
+  function toggleWindow(id, tbId) {
+    const w = document.getElementById(id);
+    if (w.style.display === 'none') {
+      showWindow(id);
+    } else {
+      hideWindow(id);
+    }
+  }
+
+  // Start menu
+  let startMenuOpen = false;
+  function toggleStartMenu() {
+    startMenuOpen = !startMenuOpen;
+    document.getElementById('start-menu').style.display = startMenuOpen ? 'flex' : 'none';
+  }
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#start-menu') && !e.target.closest('#start-btn')) {
+      document.getElementById('start-menu').style.display = 'none';
+      startMenuOpen = false;
+    }
+  });
+
+  // Email dialog
+  function showDialog() {
+    document.getElementById('email-dialog').style.display = '';
+    document.getElementById('overlay').style.display = '';
+  }
+
+  function hideDialog() {
+    document.getElementById('email-dialog').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+  }
+
+  function openEmail() {
+    window.location.href = 'mailto:ashwin.a.rodrigues@gmail.com';
+    hideDialog();
+  }
+</script>
+
+</body>
 </html>
