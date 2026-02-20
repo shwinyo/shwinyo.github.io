@@ -213,7 +213,7 @@
       overflow: visible;
     }
 
-    .window {
+    .window:not(#email-dialog) {
       position: relative !important;
       top: auto !important;
       left: auto !important;
@@ -846,7 +846,7 @@
   <div class="dialog-content">
     <div class="dialog-icon">📬</div>
     <div class="dialog-text">
-      You can reach me at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5b4a6bda2bcbbfbb4fba7bab1a7bcb2a0b0a695b2b8b4bcb9fbb6bab8">[email&#160;protected]</a>.
+      You can reach me at <span id="email-display"></span>.
     </div>
   </div>
   <div class="dialog-buttons">
@@ -925,7 +925,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Clock
   function updateClock() {
     const now = new Date();
@@ -933,7 +933,7 @@
     const m = String(now.getMinutes()).padStart(2, '0');
     const ampm = h >= 12 ? 'PM' : 'AM';
     h = h % 12 || 12;
-    document.getElementById('clock').textContent = `${h}:${m} ${ampm}`;
+    document.getElementById('clock').textContent = h + ':' + m + ' ' + ampm;
   }
   updateClock();
   setInterval(updateClock, 1000);
@@ -949,42 +949,41 @@
     e.preventDefault();
   }
 
-  document.addEventListener('mousemove', e => {
+  document.addEventListener('mousemove', function(e) {
     if (!dragging) return;
-    let x = e.clientX - dragOffX;
-    let y = e.clientY - dragOffY;
+    var x = e.clientX - dragOffX;
+    var y = e.clientY - dragOffY;
     x = Math.max(0, Math.min(window.innerWidth - dragging.offsetWidth, x));
     y = Math.max(0, Math.min(window.innerHeight - 28 - dragging.offsetHeight, y));
     dragging.style.left = x + 'px';
     dragging.style.top = y + 'px';
   });
 
-  document.addEventListener('mouseup', () => { dragging = null; });
+  document.addEventListener('mouseup', function() { dragging = null; });
 
-  let zTop = 10;
+  var zTop = 10;
   function bringToFront(el) {
     el.style.zIndex = ++zTop;
   }
 
-  // Windows
   function showWindow(id) {
-    const w = document.getElementById(id);
-    w.style.display = '';
+    var w = document.getElementById(id);
+    w.style.display = 'block';
     bringToFront(w);
-    const tbMap = {'main-window':'tb-main','links-window':'tb-links','notepad-window':'tb-notepad'};
-    const tb = document.getElementById(tbMap[id]);
+    var tbMap = {'main-window':'tb-main','links-window':'tb-links','notepad-window':'tb-notepad'};
+    var tb = document.getElementById(tbMap[id]);
     if (tb) tb.classList.add('active');
   }
 
   function hideWindow(id) {
     document.getElementById(id).style.display = 'none';
-    const tbMap = {'main-window':'tb-main','links-window':'tb-links','notepad-window':'tb-notepad'};
-    const tb = document.getElementById(tbMap[id]);
+    var tbMap = {'main-window':'tb-main','links-window':'tb-links','notepad-window':'tb-notepad'};
+    var tb = document.getElementById(tbMap[id]);
     if (tb) tb.classList.remove('active');
   }
 
   function toggleWindow(id, tbId) {
-    const w = document.getElementById(id);
+    var w = document.getElementById(id);
     if (w.style.display === 'none') {
       showWindow(id);
     } else {
@@ -992,21 +991,32 @@
     }
   }
 
-  // Start menu
-  let startMenuOpen = false;
+  var startMenuOpen = false;
   function toggleStartMenu() {
     startMenuOpen = !startMenuOpen;
     document.getElementById('start-menu').style.display = startMenuOpen ? 'flex' : 'none';
   }
 
-  document.addEventListener('click', e => {
+  document.addEventListener('click', function(e) {
     if (!e.target.closest('#start-menu') && !e.target.closest('#start-btn')) {
       document.getElementById('start-menu').style.display = 'none';
       startMenuOpen = false;
     }
   });
 
-  // Email dialog
   function showDialog() {
+    var u = 'ashwin.a.rodrigues';
+    var d = 'gmail' + '.' + 'com';
+    document.getElementById('email-display').textContent = u + '@' + d;
     document.getElementById('email-dialog').style.display = 'block';
-    document.getEl
+    document.getElementById('overlay').style.display = 'block';
+  }
+
+  function hideDialog() {
+    document.getElementById('email-dialog').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
