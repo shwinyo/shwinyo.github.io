@@ -202,6 +202,49 @@
     overflow-y: visible;
   }
 
+  @media (max-width: 600px) {
+    body {
+      overflow-y: auto;
+    }
+
+    #desktop {
+      height: auto;
+      min-height: calc(100vh - 28px);
+      overflow: visible;
+    }
+
+    .window {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      width: calc(100% - 16px) !important;
+      margin: 8px;
+      float: none;
+    }
+
+    #links-window {
+      display: block !important;
+    }
+
+    #main-window {
+      display: block !important;
+    }
+
+    #main-window .window-content {
+      height: auto;
+      max-height: none;
+      overflow-y: visible;
+    }
+
+    .win-marquee {
+      display: none;
+    }
+
+    #taskbar {
+      position: fixed;
+    }
+  }
+
   /* Email window */
   #email-window {
     top: 480px;
@@ -617,12 +660,8 @@
   <!-- Desktop Icons -->
   <div class="desktop-icon" onclick="showDialog()">
     <svg class="icon-svg" viewBox="0 0 32 32">
-      <rect x="2" y="4" width="28" height="22" fill="#fff" stroke="#000" stroke-width="1"/>
-      <rect x="2" y="4" width="28" height="4" fill="#000080"/>
-      <rect x="0" y="26" width="32" height="4" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
-      <text x="5" y="8" fill="white" font-size="3" font-family="Arial">My Page</text>
-      <text x="5" y="16" fill="#000" font-size="2.5" font-family="Arial">Ashwin</text>
-      <text x="5" y="20" fill="#000" font-size="2.5" font-family="Arial">Rodrigues</text>
+      <rect x="2" y="7" width="28" height="18" fill="#fff" stroke="#808080" stroke-width="1"/>
+      <polyline points="2,7 16,18 30,7" fill="none" stroke="#808080" stroke-width="1"/>
     </svg>
     <span class="icon-label">Contact Me</span>
   </div>
@@ -636,31 +675,6 @@
       <line x1="6" y1="22" x2="20" y2="22" stroke="#000" stroke-width="1"/>
     </svg>
     <span class="icon-label">Published Works</span>
-  </div>
-
-  <div class="desktop-icon" ondblclick="showDialog()">
-    <svg class="icon-svg" viewBox="0 0 32 32">
-      <rect x="4" y="2" width="22" height="28" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
-      <rect x="6" y="4" width="18" height="12" fill="#fff" stroke="#808080" stroke-width="0.5"/>
-      <ellipse cx="16" cy="24" rx="5" ry="4" fill="#808080"/>
-      <ellipse cx="16" cy="24" rx="3" ry="2.5" fill="#404040"/>
-      <rect x="14" y="2" width="4" height="3" fill="#808080"/>
-      <circle cx="16" cy="3.5" r="1" fill="#404040"/>
-    </svg>
-    <span class="icon-label">Email Me</span>
-  </div>
-
-  <div class="desktop-icon" ondblclick="showWindow('notepad-window')">
-    <svg class="icon-svg" viewBox="0 0 32 32">
-      <rect x="4" y="2" width="20" height="28" fill="#fff" stroke="#808080" stroke-width="1"/>
-      <rect x="4" y="2" width="20" height="4" fill="#ffff80"/>
-      <line x1="8" y1="10" x2="20" y2="10" stroke="#808080" stroke-width="1"/>
-      <line x1="8" y1="14" x2="20" y2="14" stroke="#808080" stroke-width="1"/>
-      <line x1="8" y1="18" x2="16" y2="18" stroke="#808080" stroke-width="1"/>
-      <rect x="22" y="0" width="8" height="8" fill="#00ff00" stroke="#006600" stroke-width="1"/>
-      <text x="24" y="7" font-size="6" font-weight="bold">N</text>
-    </svg>
-    <span class="icon-label">Notepad</span>
   </div>
 
   <!-- Main Bio Window -->
@@ -808,7 +822,7 @@
       ZERO HELP from Squarespace(r)<br>
       <br>
       Contact:<br>
-      ashwin.a.rodrigues@gmail.com<br>
+      <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f5e4c57485651115e114d505b4d56584a5a4c7f58525e5653115c5052">[email&#160;protected]</a><br>
     </div>
   </div>
 
@@ -823,7 +837,7 @@
         <rect width="16" height="16" fill="#000080"/>
         <text x="1" y="12" fill="white" font-size="10">✉</text>
       </svg>
-      Send Email
+      Contact
     </span>
     <div class="window-controls">
       <button class="win-btn" onclick="hideDialog()">✕</button>
@@ -832,8 +846,7 @@
   <div class="dialog-content">
     <div class="dialog-icon">📬</div>
     <div class="dialog-text">
-      <strong>Contact Ashwin Rodrigues</strong><br><br>
-      You can email me at ashwin.a.rodrigues@gmail.com.
+      You can reach me at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5b4a6bda2bcbbfbb4fba7bab1a7bcb2a0b0a695b2b8b4bcb9fbb6bab8">[email&#160;protected]</a>.
     </div>
   </div>
   <div class="dialog-buttons">
@@ -912,7 +925,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Clock
   function updateClock() {
     const now = new Date();
@@ -995,20 +1008,5 @@
 
   // Email dialog
   function showDialog() {
-    document.getElementById('email-dialog').style.display = '';
-    document.getElementById('overlay').style.display = '';
-  }
-
-  function hideDialog() {
-    document.getElementById('email-dialog').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-  }
-
-  function openEmail() {
-    window.location.href = 'mailto:ashwin.a.rodrigues@gmail.com';
-    hideDialog();
-  }
-</script>
-
-</body>
-</html>
+    document.getElementById('email-dialog').style.display = 'block';
+    document.getEl
